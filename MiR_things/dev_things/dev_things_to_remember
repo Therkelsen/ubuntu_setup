@@ -1,0 +1,46 @@
+# Join existing docker
+$ docker exec -it coding_dojo bash
+
+# Docker list
+docker ps
+
+# Close docker
+$ docker stop %docker_id%
+
+# Remember to have roscore running for ros to work
+$ roscore &
+
+# To kill roscore
+$ list
+$ kill %roscore_index%
+
+# ros in cpp
+system(". /opt/ros/noetic/setup.sh");
+
+# Firmware location on robot:
+/app/mir_bringup.runfiles/mir/robot/ros/src/platform_abstraction_layer/cameras/realsense2_camera/firmware
+
+# Copy and find files to robot
+    # Copy file to robot:
+scp testFil mirex@10.52.164.119:/data/app/data/app/sw_guid
+    #Find file on robot after incept:
+/usr/local/mir/sw_guid
+
+# Stop/Start camera node on robot:
+rosservice call /mirspawn/stop "launch_file_name: 'Cameras'"
+rosservice call /mirspawn/start "launch_file_name: 'Cameras'"
+
+# Upgrade robot software
+$ mir robot deploy_dev_cert -p <ssh-pass> <ip>
+
+Open robot UI > Settings > Software versions > Upload (Delete old versions if free space is low)
+(/workspaces/mir/signed_app.mir)
+
+Wait for it to upload, then click "up arrow" action
+
+If the above doesn't work:
+$ mir vpn -u mirex -r <robot ip> -i 192.168.12.20
+
+Choose software > Wait for progress bar > Click apply > Wait for the software status to be DONE in the software vent log > Restart Application > Reboot Platform
+
+Update the software (up-arrow next to the entry)
