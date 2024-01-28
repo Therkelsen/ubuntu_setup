@@ -22,7 +22,7 @@ sudo apt install curl -y
 curl https://repo.jellyfin.org/install-debuntu.sh | sudo bash
 
 # ftp
-sudo apt install vsftp -y
+sudo apt install vsftpd -y
 
 # power management
 sudo apt install tlp -y
