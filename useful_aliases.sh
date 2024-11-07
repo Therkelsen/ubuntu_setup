@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Git aliases to speed up workflow
 echo 'alias gfr="git fetch && git rebase origin/develop --autostash"' >> ~/.bashrc
 echo 'alias gr="git rebase"' >> ~/.bashrc
