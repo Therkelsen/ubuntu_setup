@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Hold Jellyfin package to prevent it from being updated
+sudo apt-mark hold jellyfin
+
 # Update and upgrade the system
 sudo apt-fast update
 sudo apt-fast full-upgrade -y
@@ -20,3 +23,6 @@ if [[ "$1" == "-ven" ]]; then
 else
     echo "Skipping Vencord installation. Pass -ven to install it."
 fi
+
+# Unhold Jellyfin package to allow updates again
+sudo apt-mark unhold jellyfin
