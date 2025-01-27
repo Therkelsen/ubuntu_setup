@@ -1,7 +1,23 @@
 #!/bin/bash
 
-# Hold Jellyfin package to prevent it from being updated
-sudo apt-mark hold jellyfin
+if ! command -v apt-fast &> /dev/null; then
+    echo "apt-fast is not installed. Installing it now..."
+    # Add the apt-fast repository
+    sudo add-apt-repository -y ppa:apt-fast/stable
+    # Update the package list
+    sudo apt-get update
+    # Install apt-fast
+    sudo apt-get -y install apt-fast
+    echo "apt-fast has been installed successfully."
+else
+    echo "apt-fast is already installed."
+fi
+
+
+if dpkg-query -l jellyfin &> /dev/null; then
+    # Hold Jellyfin package to prevent it from being updated
+    sudo apt-mark hold jellyfin
+fi
 
 # Update and upgrade the system
 sudo apt-fast update
@@ -14,7 +30,7 @@ sudo deborphan | xargs sudo apt-fast -y remove --purge
 sudo snap refresh
 
 # Remove unused flatpaks
-flatpak uninstall --unused -y
+sudo flatpak uninstall --unused -y
 
 # Check if the -ven parameter is passed
 if [[ "$1" == "-ven" ]]; then
@@ -24,5 +40,7 @@ else
     echo "Skipping Vencord installation. Pass -ven to install it."
 fi
 
-# Unhold Jellyfin package to allow updates again
-sudo apt-mark unhold jellyfin
+if dpkg-query -l jellyfin &> /dev/null; then
+    # Unhold Jellyfin package to allow updates again
+    sudo apt-mark unhold jellyfin
+fi
