@@ -13,6 +13,13 @@ else
     echo "apt-fast is already installed."
 fi
 
+if ! command -v curl &> /dev/null; then
+     echo "curl is not installed. Installing it now..."
+     sudo apt install curl
+     echo "curl has been installed successfully."
+else
+     echo "curl is already installed."
+fi
 
 if dpkg-query -l jellyfin &> /dev/null; then
     # Hold Jellyfin package to prevent it from being updated
