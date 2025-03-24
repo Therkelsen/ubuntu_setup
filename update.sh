@@ -1,17 +1,17 @@
 #!/bin/bash
 
-if ! command -v apt-fast &> /dev/null; then
-    echo "apt-fast is not installed. Installing it now..."
-    # Add the apt-fast repository
-    sudo add-apt-repository -y ppa:apt-fast/stable
-    # Update the package list
-    sudo apt-get update
-    # Install apt-fast
-    sudo apt-get -y install apt-fast
-    echo "apt-fast has been installed successfully."
-else
-    echo "apt-fast is already installed."
-fi
+#if ! command -v apt-fast &> /dev/null; then
+#    echo "apt-fast is not installed. Installing it now..."
+#    # Add the apt-fast repository
+#    sudo add-apt-repository -y ppa:apt-fast/stable
+#    # Update the package list
+#    sudo apt-get update
+#    # Install apt-fast
+#    sudo apt-get -y install apt-fast
+#    echo "apt-fast has been installed successfully."
+#else
+#    echo "apt-fast is already installed."
+#fi
 
 if ! command -v curl &> /dev/null; then
      echo "curl is not installed. Installing it now..."
@@ -27,11 +27,11 @@ if dpkg-query -l jellyfin &> /dev/null; then
 fi
 
 # Update and upgrade the system
-sudo apt-fast update
-sudo apt-fast full-upgrade -y
-sudo apt-fast autoremove -y
-sudo apt-fast autoclean
-sudo deborphan | xargs sudo apt-fast -y remove --purge
+sudo apt update
+sudo apt full-upgrade -y
+sudo apt autoremove -y
+sudo apt autoclean
+sudo deborphan | xargs sudo apt -y remove --purge
 
 # Refresh snaps
 sudo snap refresh
