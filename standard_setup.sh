@@ -12,7 +12,7 @@ sudo apt update
 sudo apt -y install apt-fast
 
 # prerequisites
-sudo apt install -y apt-transport-https ca-certificates containerd.io curl curl docker-ce docker-ce-cli duf flatpak git gnome-software-plugin-flatpak gnupg-agent gpg python3 python3-dev python3-pip python3-setuptools software-properties-common
+sudo apt install -y apt-transport-https ca-certificates chrome-gnome-shell containerd.io curl curl docker-ce docker-ce-cli duf flatpak git gnome-software-plugin-flatpak gnupg-agent gpg python3 python3-dev python3-pip python3-setuptools software-properties-common
 
 # flatpak things
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
