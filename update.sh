@@ -1,17 +1,25 @@
 #!/bin/bash
 
-#if ! command -v apt-fast &> /dev/null; then
-#    echo "apt-fast is not installed. Installing it now..."
-#    # Add the apt-fast repository
-#    sudo add-apt-repository -y ppa:apt-fast/stable
-#    # Update the package list
-#    sudo apt-get update
-#    # Install apt-fast
-#    sudo apt-get -y install apt-fast
-#    echo "apt-fast has been installed successfully."
-#else
-#    echo "apt-fast is already installed."
-#fi
+ven=false
+#Check if the -ven parameter is passed
+if [[ "$1" == "-ven" || "$1" == "--ven" ]]; then
+    ven=true
+else
+    echo "Skipping Vencord installation. Pass -ven to install it."
+fi
+
+if ! command -v apt-fast &> /dev/null; then
+   echo "apt-fast is not installed. Installing it now..."
+   # Add the apt-fast repository
+   sudo add-apt-repository -y ppa:apt-fast/stable
+   # Update the package list
+   sudo apt-get update
+   # Install apt-fast
+   sudo apt-get -y install apt-fast
+   echo "apt-fast has been installed successfully."
+else
+   echo "apt-fast is already installed."
+fi
 
 if ! command -v curl &> /dev/null; then
      echo "curl is not installed. Installing it now..."
@@ -39,12 +47,9 @@ sudo snap refresh
 # Remove unused flatpaks
 sudo flatpak uninstall --unused -y
 
-# Check if the -ven parameter is passed
-if [[ "$1" == "-ven" ]]; then
+if [ "$ven" = true ]; then
     echo "Installing Vencord..."
     sh -c "$(curl -sS https://raw.githubusercontent.com/Vendicated/VencordInstaller/main/install.sh)"
-else
-    echo "Skipping Vencord installation. Pass -ven to install it."
 fi
 
 if dpkg-query -l jellyfin &> /dev/null; then
